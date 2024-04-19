@@ -8,5 +8,6 @@ from typing import List, Tuple
 
 
 def element_length(lst: List[str]) -> List[Tuple[str, int]]:
-    """returns a list of tuples containing a string and its length"""
+    """returns a list of tuples where each tuple contains a string
+    and its length"""
     return [(i, len(i)) for i in lst]
