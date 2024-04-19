@@ -6,4 +6,5 @@ import math
 
 
 def floor(n: float) -> int:
+    """retruns the floor of the float n"""
     return math.floor(n)
