@@ -7,6 +7,9 @@ an asynchronous coroutine that takes in an integer
        seconds and eventually returns it.
 """
 
+import asyncio
+import random
+
 
 async def wait_random(max_delay: int = 10) -> int:
     """
@@ -16,8 +19,6 @@ async def wait_random(max_delay: int = 10) -> int:
          between 0 and max_delay (included and float value)
            seconds and eventually returns it.
     """
-    import asyncio
-    import random
 
     delay = random.uniform(0, max_delay)
     await asyncio.sleep(delay)
