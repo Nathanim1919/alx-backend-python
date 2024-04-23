@@ -9,6 +9,12 @@ import random
 
 
 async def async_generator():
+    """
+    Args:
+        no args
+    Return:
+        void
+    """
     for _ in range(10):
         asyncio.sleep(1)
         yield random.uniform(0, 10)
