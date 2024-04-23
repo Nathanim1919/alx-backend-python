@@ -7,9 +7,16 @@ wait_n = __import__("1-concurrent_coroutines.py").wait_n
 
 
 async def measure_time(n: int, max_delay: int) -> float:
-    """measures the total execution time for wait_n(n, max_delay)
+
     """
-    start = time.time()
+        Args:
+            max_delay: max wait
+            n: spawn function
+
+        Return:
+            float measure time
+    """
+    start = time.perf_counter()
     await wait_n(n, max_delay)
-    end = time.time()
-    return (end - start) / n
+    elapsed = time.perf_counter() - start
+    return elapsed / n
