@@ -5,7 +5,7 @@ from typing import Dict
 import unittest
 from unittest.mock import Mock, patch
 from parameterized import parameterized
-from utils import access_nested_map, get_json
+from utils import access_nested_map, get_json, memoize
 
 
 class TestAccessNestedMap(unittest.TestCase):
@@ -50,3 +50,28 @@ class TestGetJson(unittest.TestCase):
 
         #  Assert that the return value is the test payload
         self.assertEqual(result, test_payload)
+
+
+class TestMemoize(unittest.TestCase):
+    """Test memoize"""
+
+    def test_memoize(self):
+        """Test memoize"""
+        class TestClass:
+            """Test class"""
+            def a_method(self):
+                """Test method"""
+                return 42
+
+            @memoize
+            def a_property(self):
+                """Test property"""
+                return self.a_method()
+
+        with patch.object(TestClass, 'a_method') as mock:
+            test = TestClass()
+            test.a_property
+            test.a_property
+            mock.assert_called_once()
+
+        self.assertEqual(mock.call_count, 1)
