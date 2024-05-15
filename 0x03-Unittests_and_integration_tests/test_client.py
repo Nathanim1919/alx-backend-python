@@ -3,6 +3,7 @@
 """
 
 
+from typing import Dict
 import unittest
 from parameterized import parameterized
 from client import (GithubOrgClient)
@@ -94,6 +95,15 @@ class TestGithubOrgClient(unittest.TestCase):
                 )
                 mock_public_repos_url.assert_called_once()
             mock_get_json.assert_called_once()
+
+    @parameterized.expand([
+        ({"license": {"key": "my_license"}}, "my_license", True),
+        ({"license": {"key": "other_license"}}, "my_license", False),
+    ])
+    def test_has_license(self, repo: Dict, key: str, expected: bool) -> None:
+        """Test has license"""
+        client_has_license = GithubOrgClient('google').has_license(repo, key)
+        self.assertEqual(client_has_license, expected)
 
 
 if __name__ == "__main__":
